@@ -56,7 +56,6 @@ let validateParams = (givenUrl, givenPath) => {
 };
 
 let isDirSync = path => {
-    // Find if it is a file or dir
     try {
         return fs.statSync(path).isDirectory();
     } catch (err) {
@@ -155,7 +154,6 @@ let sendData = (url, resultPath, metadataFilePath, deleteFile, filetype) => {
     .then(result => {
         if (result.status === 200) {
             logging.log('info', colors.debug('response is coming 200'));
-            // delete the files in the directory
             if (deleteFile) {
                 logging.log('debug', colors.debug('Deleting uploaded files in directory ' + resultPath));
                 deleteFiles(resultPath, allFiles, filetype2);
