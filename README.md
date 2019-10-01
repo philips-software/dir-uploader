@@ -17,12 +17,12 @@ It is dependent on the following node modules
 One way is to keep `dir-uploader` as a dependency in your `package.json` pointing to its current repo 
 
 ```bash
-npm install [package name] --save-dev
+npm install dir-uploader --save-dev
 ```
 
 To update to the latest version
 ```bash
-npm update [package name]
+npm update dir-uploader 
 ```
 
 ## Configuration

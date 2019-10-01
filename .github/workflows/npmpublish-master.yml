@@ -1,4 +1,4 @@
-name: Node.js Package
+name: Publish master 
 
 on:
   push:
