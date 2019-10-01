@@ -2,17 +2,17 @@
   "name": "dir-uploader",
   "version": "1.0.0",
   "description": "An uploader module to upload all files in a directory or to upload files of a type. It sends a multipart request to the endpoint with all files attached to it",
-  "main": "test-result-uploader.js",
+  "main": "dir-uploader.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha tests/dir-uploader.spec.js",
     "send-data": "node -e 'require(\"./dir-uploader\").sendData()'"
   },
   "repository": {
     "type": "git",
-    "url": "https://scm.sapphirepri.com/arsalan.siddiqui/dir-uploader.git"
+    "url": "https://github.com/philips-software/dir-uploader.git"
   },
   "keywords": [
     "multipart",

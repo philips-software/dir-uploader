@@ -17,12 +17,12 @@ It is dependent on the following node modules
 One way is to keep `dir-uploader` as a dependency in your `package.json` pointing to its current repo 
 
 ```bash
-npm install [package name] --save-dev
+npm install dir-uploader --save-dev
 ```
 
 To update to the latest version
 ```bash
-npm update [package name]
+npm update dir-uploader 
 ```
 
 ## Configuration
@@ -66,7 +66,7 @@ This module includes a tests folder that contains a simple node test app, unit t
 4. Run the tests `mocha tests/runTests.js`
 
 
-##Logging
+## Logging
 This module includes logging using the winston node js plugin. If you need to lower the logging level from error for any reason you can change the logging level inside the dir-uploader.js file.
 
 ## Known issues
@@ -81,5 +81,4 @@ You can contact any of us if you run into any issues
 [MIT License](LICENSE.md) 
 
 ## Credits and references
-We needed this module to export our test results to a rest end point so we wrote it. We have tried to make it general with the configurable options  as possible. Please let us know if you have any suggestions
-We thank you to "Philips Health Solutions" in general to give us opportunity to write this plugin.
+We needed this module to export our test results to a rest end point so we wrote it. We have tried to make it general with the configurable options  as possible. Please let us know if you have any suggestions. We thank you to "Philips Health Solutions" in general to give us opportunity to write this plugin.
