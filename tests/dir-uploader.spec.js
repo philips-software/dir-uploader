@@ -1,9 +1,7 @@
-// 'use strict'
 const { assert, expect } = require('chai');
 const rewire = require('rewire');
 const uploaderModule = rewire('../dir-uploader.js');
 // debugger;
-// console.log(uploaderModule.updateParams);
 
 describe('uploader module unit tests', function() {
     const TEST_ENDPOINT = 'https://upload-end-point',
@@ -11,7 +9,6 @@ describe('uploader module unit tests', function() {
     TEST_XML_DIR = 'tests/e2e/sample-exports/browser-based-results';
 
     describe('finalizeParams function', function() {
-        // getting private function updateParams
         const finalizeParams = uploaderModule.__get__('validateParams');
 
         it('it should fail if directory or filename is not provided', function() {

@@ -2,7 +2,7 @@
 [![NPM](https://img.shields.io/npm/v/dir-uploader.svg)]()
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://scm.sapphirepri.com/arsalan.siddiqui/dir-uploader.git)
  
-**Description**: This is a npm module to upload all files in a directory or to upload files of xml type to a rest end point using multipart request. If you just pass in a file instead of directory then it will just upload the given file. If there are multiple files in a directory it sends one multipart request attaching all the files to it. Please see the configuration section for the option details 
+**Description**: This is a npm module to upload all files in a directory or to upload files of a specific type to a rest end point using multipart request. If you just pass in a file instead of directory then it will just upload the given file. If there are multiple files in a directory it sends one multipart request attaching all the files to it. Please see the configuration section for the option details 
 
 - **Technology stack**: This is a npm module written in Vanilla JS.   
 - **Status**:  This is the first functional version of this module. We are planning to add a change log starting from the next version  
@@ -34,7 +34,7 @@ result-path: the folder or file that need to be posted
 
 metadata-file: meta data file that need to be posted
 
-export-xml-only: if only file type xml that we want to export from the folder
+export-file-type: file type you want uploaded or true for all files in directory
 
 delete-files: do we want to delete folder files after successfully sending the files
 ```
@@ -82,4 +82,4 @@ You can contact any of us if you run into any issues
 
 ## Credits and references
 We needed this module to export our test results to a rest end point so we wrote it. We have tried to make it general with the configurable options  as possible. Please let us know if you have any suggestions
-We thank you to "Philips Health Solutions" in general to give us opportunity to write this plugin. We are also very thankful to [Ryan Gatto](mailto:Ryan.Gatto@philips.com) and [Shaun Conolloy](mailto:Shaun.Conolly@philips.com)for their supportive efforts all along.
+We thank you to "Philips Health Solutions" in general to give us opportunity to write this plugin.

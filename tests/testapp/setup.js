@@ -1,5 +1,4 @@
 const fs = require('fs');
-// const logging = require('winston');
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, label, prettyPrint } = format;
 const logging = createLogger({
@@ -49,8 +48,6 @@ let makeDirectory = (directory) => {
     }
 };
 
-//This file will check the browser-based-results folder and clear it
-//Then it will generate 2 xml files and 2 txt files with valid data in them
 let clearDirectory = (directory) => {
     fs.readdirSync(directory).forEach(filename =>
         fs.unlink(directory + '/' + filename, err => {
