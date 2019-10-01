@@ -2,7 +2,7 @@
   "name": "dir-uploader",
   "version": "1.0.0",
   "description": "An uploader module to upload all files in a directory or to upload files of a type. It sends a multipart request to the endpoint with all files attached to it",
-  "main": "test-result-uploader.js",
+  "main": "dir-uploader.js",
   "directories": {
     "test": "tests"
   },
