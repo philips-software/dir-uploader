@@ -1,0 +1,8 @@
+#tests
+tests
+
+#build tools
+.github
+
+#documentation
+*.md
