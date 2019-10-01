@@ -1,0 +1,85 @@
+# dir-uploader
+[![NPM](https://img.shields.io/npm/v/dir-uploader.svg)]()
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://scm.sapphirepri.com/arsalan.siddiqui/dir-uploader.git)
+ 
+**Description**: This is a npm module to upload all files in a directory or to upload files of xml type to a rest end point using multipart request. If you just pass in a file instead of directory then it will just upload the given file. If there are multiple files in a directory it sends one multipart request attaching all the files to it. Please see the configuration section for the option details 
+
+- **Technology stack**: This is a npm module written in Vanilla JS.   
+- **Status**:  This is the first functional version of this module. We are planning to add a change log starting from the next version  
+
+## Dependencies
+It is dependent on the following node modules 
+- "form-data": To create multipart request object
+- "node-fetch": To send REST request 
+- "colors": For colorful output messages in terminal
+
+## Installation
+One way is to keep `dir-uploader` as a dependency in your `package.json` pointing to its current repo 
+
+```bash
+npm install [package name] --save-dev
+```
+
+To update to the latest version
+```bash
+npm update [package name]
+```
+
+## Configuration
+The following are the configurable options using command `npm run send-data` 
+```   
+url: The URL of REST end point where we post the files
+
+result-path: the folder or file that need to be posted
+
+metadata-file: meta data file that need to be posted
+
+export-xml-only: if only file type xml that we want to export from the folder
+
+delete-files: do we want to delete folder files after successfully sending the files
+```
+
+## Usage
+You can use it using a commandline or inside another JS file as an import.
+
+From Command line you can either use send-data npm task or directly call export function sendData
+
+Using send-data npm task:
+
+```
+npm run send-data -- url='http://localhost:3020/post' result-path='tests/e2e/sample-exports/browser-based-results' metadata-file='tests/e2e/sample-exports/test.json' export-xml-only=true delete-files=false
+```
+
+Using js exported function sendData:
+
+```
+node -e 'require("./dir-uploader").sendData("http://localhost:3020/post","tests/e2e/sample-exports/browser-based-results","tests/e2e/sample-exports/test.json",false,true)'
+```
+
+You can also find an example of how to use module in the tests folder "runTests.js" file. These are e2e tests for this module.
+
+## How to test the software
+This module includes a tests folder that contains a simple node test app, unit tests and end to end(e2e) tests. The tests runner is mocha (https://mochajs.org/). To run the tests 
+1. Firstly, install all the dependencies by `npm install`.
+2. It is easier to run when you install mocha as a global dependency `npm i -g mocha`
+3. Start the node test app `node tests/testapp/server.js` (tested on node v10).
+4. Run the tests `mocha tests/runTests.js`
+
+
+##Logging
+This module includes logging using the winston node js plugin. If you need to lower the logging level from error for any reason you can change the logging level inside the dir-uploader.js file.
+
+## Known issues
+We are actively using this module as a component in our Continuous Integration Cycle and we don't have any open issue. Please contact us if you run into any issues.
+
+## Contact / Getting help
+You can contact any of us if you run into any issues 
+- Arsalan Siddiqui <<Arsalan.Siddiqui@philips.com>>
+- James Landy <<James.Landy@philips.com>>
+
+## License
+[MIT License](LICENSE.md) 
+
+## Credits and references
+We needed this module to export our test results to a rest end point so we wrote it. We have tried to make it general with the configurable options  as possible. Please let us know if you have any suggestions
+We thank you to "Philips Health Solutions" in general to give us opportunity to write this plugin. We are also very thankful to [Ryan Gatto](mailto:Ryan.Gatto@philips.com) and [Shaun Conolloy](mailto:Shaun.Conolly@philips.com)for their supportive efforts all along.

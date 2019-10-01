@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<testsuites>
+  <testsuite name="chrome 75.0.3770.100" timestamp="2019-07-10T14:32:13" id="0" hostname="Ms-MacBook-Pro.local" tests="1" failures="1">
+    <testcase requirements="XRAY-1234" name="The login page is loaded successfully" time="0" classname="Given">
+      <failure msg="testcase failed"/>
+    </testcase>
+  </testsuite>
+  <testsuite name="chrome 75.0.3770.100" timestamp="2019-07-10T14:33:04" id="0" hostname="Ms-MacBook-Pro.local" tests="1" failures="0">
+    <testcase requirements="XRAY-1234" name="The login page is loaded successfully" time="0" classname="Given"/>
+  </testsuite>
+  <testsuite name="chrome 75.0.3770.100" timestamp="2019-07-10T14:48:13" id="0" hostname="Ms-MacBook-Pro.local" tests="1" failures="0">
+    <testcase requirements="XRAY-1234" name="The login page is loaded successfully" time="0" classname="Given"/>
+  </testsuite>
+</testsuites>
