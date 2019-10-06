@@ -255,7 +255,6 @@ describe('testing uploader module with correct params and all files deleted with
 });
 
 describe('testing uploader module with no params', function () {
-    //this will output an error which is expected
     it('testing valid params and standard response', function(){
         let result = myModule.sendData("", "");
         expect(result).undefined
@@ -263,7 +262,6 @@ describe('testing uploader module with no params', function () {
 });
 
 describe('testing uploader module with just url param', function () {
-    //this will output an error which is expected
     it('testing valid params and standard response', function(){
         let result = myModule.sendData("http://localhost:3020/post", "");
         expect(result).undefined
@@ -271,7 +269,6 @@ describe('testing uploader module with just url param', function () {
 });
 
 describe('testing uploader module with just filepath param', function () {
-    //this will output an error which is expected
     it('testing valid params and standard response', function(){
         let result = myModule.sendData("", "./tests/e2e/sample-exports/automated-based-results");
         expect(result).undefined
@@ -279,7 +276,6 @@ describe('testing uploader module with just filepath param', function () {
 });
 
 describe('testing uploader module with just incorrect url param and no filepath param', function () {
-    //this will output an error which is expected
     it('testing valid params and standard response', function(){
         let result = myModule.sendData("http://localhost:9999/post", "");
         expect(result).undefined
