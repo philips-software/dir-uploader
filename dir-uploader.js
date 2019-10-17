@@ -4,7 +4,7 @@ const fs = require('fs');
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, label, prettyPrint } = format;
 const logging = createLogger({
-    level: 'error',
+    level: 'debug',
     format: format.combine(
         timestamp(),
         format.simple()
@@ -22,7 +22,7 @@ const logging = createLogger({
 });
 let FormData = require('form-data');
 const fetch = require('node-fetch');
-let finalFile, finalUrl;
+let finalFile, finalUrl, finalDeleteFile;
 
 colors.enabled = true;
 colors.setTheme({
@@ -110,7 +110,8 @@ let sendData = (url, resultPath, metadataFilePath, deleteFile, filetype) => {
     url = url || argUrl;
     resultPath = resultPath || argResultPath;
     metadataFilePath = metadataFilePath || argMetadataFilePath;
-    deleteFile = deleteFile || argDeleteFile;
+    finalDeleteFile = deleteFile || argDeleteFile;
+    logging.log('debug', 'deleteFile: ' + finalDeleteFile);
     let allFiles = (exportfileType === true) || (filetype === true);
     let filetype2 = '*';
     if(allFiles === false)  {
@@ -118,7 +119,7 @@ let sendData = (url, resultPath, metadataFilePath, deleteFile, filetype) => {
         if (filetype) { filetype2 = filetype; }
     }
 
-    logging.log('debug', colors.debug('URL: ' + url + 'delete-file = ' + deleteFile));
+    logging.log('debug', colors.debug('URL: ' + url));
     if(!validateParams(url, resultPath)) return;
 
     var formData = new FormData();
@@ -136,7 +137,7 @@ let sendData = (url, resultPath, metadataFilePath, deleteFile, filetype) => {
                 formData.append('files', fs.createReadStream(resultPath + '/' + filename));
             } else {
                 let extension = filename.split('.').pop();
-                // logging.log('debug', extension);
+                logging.log('debug', 'HERE IS fileType: ' + filetype2 + ' & extension: ' + extension);
                 if(extension === filetype2) {
                     logging.log('debug', colors.debug("Uploading file: %s/%s", resultPath, filename));
                     formData.append('files', fs.createReadStream(resultPath + '/' + filename));
@@ -154,7 +155,7 @@ let sendData = (url, resultPath, metadataFilePath, deleteFile, filetype) => {
     .then(result => {
         if (result.status === 200) {
             logging.log('info', colors.debug('response is coming 200'));
-            if (deleteFile) {
+            if (finalDeleteFile) {
                 logging.log('debug', colors.debug('Deleting uploaded files in directory ' + resultPath));
                 deleteFiles(resultPath, allFiles, filetype2);
             }
