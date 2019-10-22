@@ -1,5 +1,6 @@
 # dir-uploader
 [![NPM](https://img.shields.io/npm/v/dir-uploader.svg)]()
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=philips-software_dir-uploader&metric=alert_status)](https://sonarcloud.io/dashboard?id=philips-software_dir-uploader)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://scm.sapphirepri.com/arsalan.siddiqui/dir-uploader.git)
  
 **Description**: This is a npm module to upload all files in a directory or to upload files of a specific type to a rest end point using multipart request. If you just pass in a file instead of directory then it will just upload the given file. If there are multiple files in a directory it sends one multipart request attaching all the files to it. Please see the configuration section for the option details 
