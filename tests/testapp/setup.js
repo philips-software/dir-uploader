@@ -19,7 +19,6 @@ const logging = createLogger({
     ]
 });
 
-let directory = './tests/e2e/sample-exports/automated-based-results';
 let xmlFile = '<?xml version="1.0"?>\n' +
     '<testsuites>\n' +
     '  <testsuite name="chrome 75.0.3770.100" timestamp="2019-07-10T14:32:13" id="0" hostname="Ms-MacBook-Pro.local" tests="1" failures="1">\n' +
@@ -89,8 +88,6 @@ let setUpTests = (directory) => {
     makeTxtFiles(directory);
     return true;
 }
-
-setUpTests(directory);
 
 module.exports = {
     setUpTests
