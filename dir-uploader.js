@@ -179,12 +179,10 @@ let sendData = (url, resultPath, metadataFile, deleteFile, filetype) => {
 let sendMultiFolderData = (url, parentFolderPath, metadataFileName, deleteFiles, filetype) => {
     url = url || argUrl;
     parentFolderPath = parentFolderPath || argResultPath;
-    const finalMetaDataFileName = metadataFileName || argMetaDataFileName;
     finalDeleteFile = deleteFiles || argDeleteFile;
     log.log('debug', 'deleteFile: ' + finalDeleteFile);
     let finalFileType = (exportfileType === true) || (filetype === true);
     let allFiles = !finalFileType ? true : false;
-    let filetype2 = '*';
     if(!allFiles)  {
         if (exportfileType) { filetype2 = exportfileType; }
         if (filetype) { filetype2 = filetype; }
@@ -213,7 +211,7 @@ let sendMultiFolderData = (url, parentFolderPath, metadataFileName, deleteFiles,
     let resultArray = [];
     dirList.forEach((value) => {
         const finalFolder = parentFolderPath + '/' + value;
-        const result = sendData(url, finalFolder, finalFolder + '/' + metadataFileName, 
+        const result = sendData(url, finalFolder, metadataFileName, 
                                 true, 'xml');
         resultArray.push(result);
     });
