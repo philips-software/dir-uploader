@@ -1,3 +1,5 @@
 node_modules
 .idea
 *.log
+rw-code.js
+tests/e2e/sample-exports
