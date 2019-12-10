@@ -124,13 +124,13 @@ let sendData = (url, resultPath, metadataFile, deleteFile, filetype) => {
 
     var formData = new FormData();
 
-    if (metadataFile) {
-        formData.append('info', fs.createReadStream(metadataFile));
-        log.log('debug', colors.debug('Added metadata file ' + metadataFile));
-    }
-
     if (isDirSync(finalFile)) {
-        formData.append('info', JSON.stringify({ test: 'e2e' }));
+        if (metadataFile) {
+            formData.append('info', fs.createReadStream(metadataFile));
+            log.log('debug', colors.debug('Added metadata file ' + metadataFile));
+        } else {
+            throw error('Metadata file is not provided');
+        }        
         fs.readdirSync(resultPath).forEach(filename => {
             if (allFiles) {
                log.log('debug', colors.debug("Uploading file: %s/%s", resultPath, filename));
@@ -147,21 +147,21 @@ let sendData = (url, resultPath, metadataFile, deleteFile, filetype) => {
     } else {
         formData.append('files', fs.createReadStream(resultPath));
     }
-
+    log.info('HERE are formData.getHeaders(): ' + JSON.stringify(formData.getHeaders()));
     return fetch(url, {
         method: 'POST',
-        body: formData
+        body: formData,
+        headers: formData.getHeaders()
     })
     .then(result => {
+        
         if (result.status === 200) {
             log.log('info', colors.debug('response is coming 200'));
             if (finalDeleteFile) {
                 log.log('debug', colors.debug('Deleting uploaded files in directory ' + resultPath));
                 deleteFiles(resultPath, allFiles, filetype2);
             }
-        }
-        let dupResult = result.clone();
-        result.json()
+            result.json()
             .then(json => {
                 log.log('info', colors.data(JSON.stringify(json)));
                 return json;
@@ -169,7 +169,12 @@ let sendData = (url, resultPath, metadataFile, deleteFile, filetype) => {
             .catch(err => {
                 log.log('error', colors.error(err));
             });
-        return dupResult;
+        } else {
+            log.error('Not successful result: status: ' + result.status);
+            log.error('Here is the result object: ' + JSON.stringify(result));
+        }
+        
+        return result;
     })
     .catch(err => {
         log.log('error', colors.error(err));
