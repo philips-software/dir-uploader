@@ -216,7 +216,7 @@ let sendMultiFolderData = (url, parentFolderPath, metadataFileName, deleteFiles,
     let resultArray = [];
     dirList.forEach((value) => {
         const finalFolder = parentFolderPath + '/' + value;
-        const result = sendData(url, finalFolder, metadataFileName, 
+        const result = sendData(url, finalFolder, finalFolder + '/' + metadataFileName, 
                                 true, 'xml');
         resultArray.push(result);
     });
