@@ -109,9 +109,9 @@ const argMetaDataFileName = getArg('metadata-file-name');
 
 let sendData = (url, resultPath, metadataFile, deleteFile, filetype) => {
     url = url || argUrl;
-    resultPath = resultPath || argResultPath;
-    metadataFile = metadataFile || argMetadataFilePath;
-    finalDeleteFile = deleteFile || argDeleteFile;
+    resultPath = ((resultPath || argResultPath) == 'true');
+    metadataFile = ((metadataFile || argMetadataFilePath) == 'true');
+    finalDeleteFile = ((deleteFile || argDeleteFile) == 'true');
     log.log('debug', 'deleteFile: ' + finalDeleteFile);
     let allFiles = (exportfileType === true) || (filetype === true);
     let filetype2 = '*';
@@ -137,7 +137,7 @@ let sendData = (url, resultPath, metadataFile, deleteFile, filetype) => {
                 formData.append('files', fs.createReadStream(resultPath + '/' + filename));
             } else {
                 let extension = filename.split('.').pop();
-                log.log('debug', 'HERE IS fileType: ' + filetype2 + ' & extension: ' + extension);
+                log.log('debug', 'Here is fileType: ' + filetype2 + ' & extension: ' + extension);
                 if(extension === filetype2) {
                     log.log('debug', colors.debug("Uploading file: %s/%s", resultPath, filename));
                     formData.append('files', fs.createReadStream(resultPath + '/' + filename));
@@ -154,9 +154,8 @@ let sendData = (url, resultPath, metadataFile, deleteFile, filetype) => {
         headers: formData.getHeaders()
     })
     .then(result => {
-        
         if (result.status === 200) {
-            log.log('info', colors.debug('response is coming 200'));
+            log.info(colors.debug('response is coming 200'));
             if (finalDeleteFile) {
                 log.log('debug', colors.debug('Deleting uploaded files in directory ' + resultPath));
                 deleteFiles(resultPath, allFiles, filetype2);
