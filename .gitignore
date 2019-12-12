@@ -3,3 +3,4 @@ node_modules
 *.log
 rw-code.js
 tests/e2e/sample-exports
+**uploads/

@@ -105,55 +105,61 @@ let argResultPath = getArg('result-path');
 let argMetadataFilePath = getArg('metadata-file');
 let argDeleteFile = getArg('delete-files');
 let exportfileType =  getArg('export-file-type');
-const argMetaDataFileName = getArg('metadata-file-name');
 
-let sendData = (url, resultPath, metadataFile, deleteFile, filetype) => {
+let sendData = (url, resultPath, metadataFile, deleteFile, filetype, resultFileFieldName) => {
+    log.debug('url: ' + url);
     url = url || argUrl;
-    resultPath = ((resultPath || argResultPath) == 'true');
-    metadataFile = ((metadataFile || argMetadataFilePath) == 'true');
+    resultPath = resultPath || argResultPath;
+    metadataFile = metadataFile || argMetadataFilePath;
     finalDeleteFile = ((deleteFile || argDeleteFile) == 'true');
     log.log('debug', 'deleteFile: ' + finalDeleteFile);
+    const finalResultFileFieldName = resultFileFieldName || 'files'
     let allFiles = (exportfileType === true) || (filetype === true);
     let filetype2 = '*';
+    var formData = new FormData();
+
     if(allFiles === false)  {
         if (exportfileType) { filetype2 = exportfileType; }
         if (filetype) { filetype2 = filetype; }
     }
-
+    
+    log.debug('url: ' + url);
+    log.debug('resultPath: ' + resultPath);
+    log.debug('finalResultFileFieldName: ' + finalResultFileFieldName)
+    
     if(!validateParams(url, resultPath)) return;
-
-    var formData = new FormData();
 
     if (isDirSync(finalFile)) {
         if (metadataFile) {
             formData.append('info', fs.createReadStream(metadataFile));
-            log.log('debug', colors.debug('Added metadata file ' + metadataFile));
+            log.debug('Added metadata file ' + metadataFile);
         } else {
             throw error('Metadata file is not provided');
         }        
         fs.readdirSync(resultPath).forEach(filename => {
             if (allFiles) {
-               log.log('debug', colors.debug("Uploading file: %s/%s", resultPath, filename));
-                formData.append('files', fs.createReadStream(resultPath + '/' + filename));
+               log.debug("Uploading file: %s/%s", resultPath, filename);
+                formData.append(finalResultFileFieldName, fs.createReadStream(resultPath + '/' + filename));
             } else {
                 let extension = filename.split('.').pop();
                 log.log('debug', 'Here is fileType: ' + filetype2 + ' & extension: ' + extension);
                 if(extension === filetype2) {
                     log.log('debug', colors.debug("Uploading file: %s/%s", resultPath, filename));
-                    formData.append('files', fs.createReadStream(resultPath + '/' + filename));
+                    formData.append(finalResultFileFieldName, fs.createReadStream(resultPath + '/' + filename));
                 }
             }
         });
     } else {
-        formData.append('files', fs.createReadStream(resultPath));
+        formData.append(finalResultFileFieldName, fs.createReadStream(resultPath));
     }
-    log.info('HERE are formData.getHeaders(): ' + JSON.stringify(formData.getHeaders()));
+    log.debug('Here are formData.getHeaders(): ' + JSON.stringify(formData.getHeaders()));
     return fetch(url, {
         method: 'POST',
         body: formData,
         headers: formData.getHeaders()
     })
     .then(result => {
+        let dupResult = result.clone();
         if (result.status === 200) {
             log.info(colors.debug('response is coming 200'));
             if (finalDeleteFile) {
@@ -173,14 +179,14 @@ let sendData = (url, resultPath, metadataFile, deleteFile, filetype) => {
             log.error('Here is the result object: ' + JSON.stringify(result));
         }
         
-        return result;
+        return dupResult;
     })
     .catch(err => {
         log.log('error', colors.error(err));
     });
 };
 
-let sendMultiFolderData = (url, parentFolderPath, metadataFileName, deleteFiles, filetype) => {
+let sendMultiFolderData = (url, parentFolderPath, metadataFileName, deleteFiles, filetype, resultFileFieldName) => {
     url = url || argUrl;
     parentFolderPath = parentFolderPath || argResultPath;
     finalDeleteFile = deleteFiles || argDeleteFile;
@@ -216,7 +222,7 @@ let sendMultiFolderData = (url, parentFolderPath, metadataFileName, deleteFiles,
     dirList.forEach((value) => {
         const finalFolder = parentFolderPath + '/' + value;
         const result = sendData(url, finalFolder, finalFolder + '/' + metadataFileName, 
-                                true, 'xml');
+                                true, 'xml', resultFileFieldName);
         resultArray.push(result);
     });
 

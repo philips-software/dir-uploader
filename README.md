@@ -62,9 +62,10 @@ You can also find an example of how to use module in the tests folder "runTests.
 ## How to test the software
 This module includes a tests folder that contains a simple node test app, unit tests and end to end(e2e) tests. The tests runner is mocha (https://mochajs.org/). To run the tests 
 1. Firstly, install all the dependencies by `npm install`.
-2. It is easier to run when you install mocha as a global dependency `npm i -g mocha`
-3. Start the node test app `node tests/testapp/server.js` (tested on node v10).
-4. Run the tests `mocha tests/runTests.js`
+2. Go into testap dir `cd tests/testapp` and run `npm install` to install testApp dependencies.
+3. It is easier to run when you install mocha as a global dependency `npm i -g mocha`
+4. Start the node test app `node tests/testapp/server.js` (tested on node v13).
+5. Run the tests `mocha tests/runTests.js`
 
 
 ## Logging
