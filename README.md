@@ -43,15 +43,23 @@ delete-files: do we want to delete folder files after successfully sending the f
 ## Usage
 You can use it using a commandline or inside another JS file as an import.
 
-From Command line you can either use send-data npm task or directly call export function sendData
+From Command line you can either
+- create and use send-data npm task 
+- or directly call export function sendData
 
-Using send-data npm task:
+**Using send-data npm task:**
 
+package.json script line would look like this
 ```
-npm run send-data -- url='http://localhost:3020/post' result-path='tests/e2e/sample-exports/browser-based-results' metadata-file='tests/e2e/sample-exports/test.json' export-xml-only=true delete-files=false
+"send-data": "node -e 'require(\"dir-uploader\").sendData()'"
 ```
 
-Using js exported function sendData:
+At command prompt:
+```
+npm run send-data -- url='http://localhost:9456/resultmultipartupload' result-path='_test-reports/e2e-test-results/browser-based-results_2020-01-15T17_04' metadata-file='_test-reports/e2e-test-results/browser-based-results_2020-01-15T17_04/metadata.json' export-file-type=xml delete-files=false
+```
+
+**Using js exported function sendData:**
 
 ```
 node -e 'require("./dir-uploader").sendData("http://localhost:3020/post","tests/e2e/sample-exports/browser-based-results","tests/e2e/sample-exports/test.json",false,true)'
