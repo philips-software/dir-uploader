@@ -102,6 +102,7 @@ log.log('debug', '-------END OF ARGS-------');
 
 let argUrl = getArg('url');
 let argResultPath = getArg('result-path');
+let argMetadataFileName = getArg('metadata-file-name');
 let argMetadataFilePath = getArg('metadata-file');
 let argDeleteFile = getArg('delete-files');
 let exportfileType =  getArg('export-file-type');
@@ -189,8 +190,10 @@ let sendData = (url, resultPath, metadataFile, deleteFile, filetype, resultFileF
 let sendMultiFolderData = (url, parentFolderPath, metadataFileName, deleteFiles, filetype, resultFileFieldName) => {
     url = url || argUrl;
     parentFolderPath = parentFolderPath || argResultPath;
+    metadataFileName = metadataFileName || argMetadataFileName || 'metadata.json'
+    log.debug('sendMultiFolderData(metadataFileName..): ' + metadataFileName);
     finalDeleteFile = deleteFiles || argDeleteFile;
-    log.log('debug', 'deleteFile: ' + finalDeleteFile);
+    log.debug('deleteFile: ' + finalDeleteFile);
     let finalFileType = (exportfileType === true) || (filetype === true);
     let allFiles = !finalFileType ? true : false;
     if(!allFiles)  {
