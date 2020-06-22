@@ -43,6 +43,8 @@ delete-files: do we want to delete folder files after successfully sending the f
 ## Usage
 You can use it using a commandline or inside another JS file as an import.
 
+
+### Single Directory Upload
 From Command line you can either
 - create and use send-data npm task 
 - or directly call export function sendData
@@ -65,7 +67,13 @@ npm run send-data -- url='http://localhost:9456/resultmultipartupload' result-pa
 node -e 'require("./dir-uploader").sendData("http://localhost:3020/post","tests/e2e/sample-exports/browser-based-results","tests/e2e/sample-exports/test.json",false,true)'
 ```
 
-You can also find an example of how to use module in the tests folder "runTests.js" file. These are e2e tests for this module.
+### Multiple Directory Upload
+Similarly you can also upload multiple directory using a command like 
+```
+node -e 'require("./dir-uploader").sendMultiFolderData("http://localhost:3020/post","tests/e2e/sample-exports/browser-based-results",'metadata.json', false, 'xml', 'tests')'
+```
+
+You can also see an example of how to use module with single and multiple file upload options in the tests folder "runTests.js" file. These are e2e tests for this module. You can run them using the instructions given in the below section
 
 ## How to test the software
 This module includes a tests folder that contains a simple node test app, unit tests and end to end(e2e) tests. The tests runner is mocha (https://mochajs.org/). To run the tests 
