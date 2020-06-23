@@ -1,4 +1,4 @@
-# dloader (A single or multi directory uploader using a REST Multipart request)
+# dloader(dir-uploader: A single or multi directory uploader using a REST Multipart request)
 [![NPM](https://img.shields.io/npm/v/dir-uploader.svg)]()
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=philips-software_dir-uploader&metric=alert_status)](https://sonarcloud.io/dashboard?id=philips-software_dir-uploader)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://scm.sapphirepri.com/arsalan.siddiqui/dir-uploader.git)
